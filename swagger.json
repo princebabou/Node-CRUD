@@ -1,0 +1,264 @@
+{
+  "definition":{
+    "openapi":"3.1.0",
+  "info": {
+    "title": "Employee API",
+    "version": "1.0.7",
+    "description": "API documentation for managing employees"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "localhost:5000/api-docs",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "employee",
+      "description": "Operations about Employee"
+    }
+  ],
+  "paths": {
+    "/employee": {
+      "get": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Get all employees",
+        "description": "Retrieve a list of all employees.",
+        "responses": {
+          "200": {
+            "description": "A list of employees",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Employee"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Add a new employee",
+        "description": "Add a new employee to the system.",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employee added successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Employee Added Successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employee/{employeeID}": {
+      "get": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Get employee by ID",
+        "description": "Retrieve an employee's details by their ID.",
+        "parameters": [
+          {
+            "name": "employeeID",
+            "in": "path",
+            "description": "The ID of the employee to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single employee object",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Update an existing employee",
+        "description": "Update details of an existing employee.",
+        "parameters": [
+          {
+            "name": "employeeID",
+            "in": "path",
+            "description": "The ID of the employee to update.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employee updated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Updated successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "employee"
+        ],
+        "summary": "Remove an employee",
+        "description": "Remove an employee from the system by their ID.",
+        "parameters": [
+          {
+            "name": "employeeID",
+            "in": "path",
+            "description": "The ID of the employee to remove.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee removed successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Employee removed successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "An error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+ 
+    "Employee": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        },
+        "phone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "age",
+        "phone"
+      ]
+    }
+  }
+}
+
